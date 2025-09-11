@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -31,7 +32,10 @@ public class Actor : MonoBehaviour
         this.attributes = attributes;
         this.actorType = actorType;
         currentWeapon = actorType.defaultWeapon;
-        foreach (var ability in actorType.defaultAbilities) AddAbility(ability);
+        foreach (var ability in actorType.defaultAbilities)
+        {
+            AddAbility(ability.Clone());
+        }
     }
 
     public int DealDamage(Actor target, int currentMove)

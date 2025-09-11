@@ -17,43 +17,12 @@ public class ActorTypeSO : ScriptableObject
 }
 
 
-[Serializable]
-public abstract class AbilityAbstract
-{
-    public bool IsActivated { get; protected set; }
-    public abstract void Apply(Actor caller);
 
-    public virtual string GetDebugName()
-    {
-        return "AbstractAbility";
-    }
-}
 
 [Serializable]
-public class AgilityBonus : AbilityAbstract
+public struct LevelUpReward
 {
-    public override string GetDebugName()
-    {
-        return "AgilityBonus";
-    }
-
-    public override void Apply(Actor caller)
-    {
-        Debug.Log("Applied!");
-        caller.ModifyAttributes(0, 1, 0);
-        Debug.Log(caller.GetAttributes().Agility);
-    }
-}
-
-[Serializable]
-public class StrengthBonus : AbilityAbstract
-{
-    private bool isApplied;
-
-    public override void Apply(Actor caller)
-    {
-        Debug.Log("Applied strength!");
-        caller.ModifyAttributes(1, 0, 0);
-        Debug.Log(caller.GetAttributes().Agility);
-    }
+    public int level;
+    public List<AbilityAbstract> newAbilities;
+    public Attributes attributeBonus;
 }
