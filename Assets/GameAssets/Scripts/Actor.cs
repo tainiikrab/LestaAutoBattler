@@ -3,12 +3,11 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Actor : MonoBehaviour
+public abstract class Actor : MonoBehaviour
 {
-    private readonly List<AbilityAbstract> currentAbilities = new();
-    private ActorTypeSO actorType;
-    private Attributes attributes;
-    private WeaponSO currentWeapon;
+    protected List<AbilityAbstract> currentAbilities = new();
+    
+    protected Attributes attributes;
 
     public void ModifyAttributes(int strength, int agility, int endurance)
     {
@@ -27,21 +26,23 @@ public class Actor : MonoBehaviour
         currentAbilities.Add(ability);
     }
 
-    public void Initialize(Attributes attributes, ActorTypeSO actorType)
-    {
-        this.attributes = attributes;
-        this.actorType = actorType;
-        currentWeapon = actorType.defaultWeapon;
-        foreach (var ability in actorType.defaultAbilities)
-        {
-            AddAbility(ability.Clone());
-        }
-    }
+    public abstract void Initialize(Attributes attributes, ActorTypeSO actorType);
+    public abstract int DealDamage(Actor target, int currentMove);
+}
 
-    public int DealDamage(Actor target, int currentMove)
+public class Player : Actor
+{
+    public override void Initialize(Attributes attributes, ActorTypeSO actorType)
     {
-        if (Random.Range(1, attributes.Agility + target.attributes.Agility + 1) <= target.attributes.Agility) return -1;
-        var damage = currentWeapon.damage + actorType.defaultWeaponDamage + attributes.Strength;
+        throw new System.NotImplementedException();
+    }
+    public WeaponSO currentWeapon;
+    public Dictionary<PlayerClassSO, int> playerClasses;
+    
+    public override int DealDamage(Actor target, int currentMove)
+    {
+        if (Random.Range(1, attributes.Agility + target.GetAttributes().Agility + 1) <= target.GetAttributes().Agility) return -1;
+        var damage = currentWeapon.damage + attributes.Strength;
         foreach (var ability in currentAbilities) ability.Apply(this);
         Debug.Log(attributes.Agility);
         return damage;
