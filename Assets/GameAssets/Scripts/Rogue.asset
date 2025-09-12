@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5055d8443517a7498769acb77a6dfad, type: 3}
-  m_Name: PlayerActorType
+  m_Name: Rogue
   m_EditorClassIdentifier: Assembly-CSharp::ActorType
   typeName: Player
   isPlayer: 1
   defaultAttributes:
-    Strength: 0
-    Agility: 0
-    Endurance: 0
-  defaultHealth: 5
+    strength: 0
+    agility: 0
+    endurance: 0
+  defaultHealth: 4
   defaultWeaponDamage: 0
   droppedWeapon: {fileID: 0}
-  defaultWeapon: {fileID: 11400000, guid: 3eb42be4cdbeb174dafccbc7f135bd9d, type: 2}
+  defaultWeapon: {fileID: 11400000, guid: abe7b53cf002b6c4a8b31bbb24626c2e, type: 2}
   defaultAbilities:
-  - rid: 1160705196923551958
+  - rid: 1160705230450721017
+  levelUpRewards: []
   references:
     version: 2
     RefIds:
-    - rid: 1160705196923551958
+    - rid: 1160705230450721017
       type: {class: AgilityBonus, ns: , asm: Assembly-CSharp}
       data: 
