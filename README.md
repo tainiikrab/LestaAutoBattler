@@ -1,2 +1,2 @@
 # LestaAutoBattler
-Lesta academy test task
+Lesta academy test task. Incomplete.
